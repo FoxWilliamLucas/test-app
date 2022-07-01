@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller('InvoiceController')
+    // ->middleware(['auth:users'])
+    ->group(function () {
+        Route::get('/invoices/{id}',    'show');
+        Route::post('/invoices',        'store');
 });
