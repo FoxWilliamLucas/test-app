@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Session;
 use App\Models\Customer;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -66,7 +67,7 @@ class DataSampleSeeder extends Seeder
                 [
                     'email'         => 'user8@mail.com',
                     'created'       => '2021-03-03',
-                    'customer_id'   => '',
+                    'customer_id'   => '1',
                 ],    
                 [
                     'email'         => 'user9@mail.com',
@@ -83,7 +84,7 @@ class DataSampleSeeder extends Seeder
             'sessions'  => [
                 [
                     'user_id'       => '1',
-                    'activated'     => '',
+                    'activated'     => null,
                     'appointment'   => '2021-01-22',
                 ],
                 [
@@ -94,17 +95,17 @@ class DataSampleSeeder extends Seeder
                 [
                     'user_id'       => '2',
                     'activated'     => '2021-02-01',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '4',
                     'activated'     => '2021-01-15',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '4',
                     'activated'     => '2021-01-16',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '4',
@@ -113,7 +114,7 @@ class DataSampleSeeder extends Seeder
                 ],
                 [
                     'user_id'       => '4',
-                    'activated'     => '',
+                    'activated'     => null,
                     'appointment'   => '2021-01-30',
                 ],
                 [
@@ -123,43 +124,43 @@ class DataSampleSeeder extends Seeder
                 ],
                 [
                     'user_id'       => '9',
-                    'activated'     => '',
+                    'activated'     => null,
                     'appointment'   => '2020-12-22',
                 ],
                 [
                     'user_id'       => '10',
                     'activated'     => '2020-12-01',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '10',
                     'activated'     => '2020-12-02',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '10',
                     'activated'     => '2020-12-03',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '10',
-                    'activated'     => '',
+                    'activated'     => null,
                     'appointment'   => '2021-01-04',
                 ],
                 [
                     'user_id'       => '3',
                     'activated'     => '2021-01-01',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
                 [
                     'user_id'       => '5',
-                    'activated'     => '',
+                    'activated'     => null,
                     'appointment'   => '2021-04-01',
                 ],
                 [
                     'user_id'       => '5',
                     'activated'     => '2021-04-01',
-                    'appointment'   => '',
+                    'appointment'   => null,
                 ],
             ]
         ];
