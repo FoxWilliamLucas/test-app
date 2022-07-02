@@ -19,6 +19,11 @@ class InvoiceController extends Controller
 {
 
 
+    /**
+     * @param Invoice $invoice
+     * 
+     * @return Response
+     */
     public function show(Invoice $invoice){
         try{
             $invoice->load('customer','customer.users', 'customer.users.sessions');
@@ -28,6 +33,11 @@ class InvoiceController extends Controller
         }
     }
 
+    /**
+     * @param CreateInvoiceRequest $request
+     * 
+     * @return Response
+     */
     public function store(CreateInvoiceRequest $request){
         try{
             $data = $request->validated();

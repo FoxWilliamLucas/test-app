@@ -31,11 +31,6 @@ class NotOverlapped implements Rule
      */
     public function passes($attribute, $value)
     {
-        // dd(
-        //     DB::table($this->table)
-        //             ->where($this->start, '<=', request($this->end))
-        //             ->where($this->end, '>=', request($this->start))->get()
-        // );
         return DB::table($this->table)
                     ->where($this->start, '<=', request($this->end))
                     ->where($this->end, '>=', request($this->start))->count('id')

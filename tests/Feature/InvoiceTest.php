@@ -13,11 +13,8 @@ class InvoiceTest extends TestCase
 
     public function setUp(): void{
         parent::setUp();
-
         // seed the database
         $this->artisan('migrate:refresh --seed');
-        // alternatively you can call
-        // $this->seed();
     }
 
 
