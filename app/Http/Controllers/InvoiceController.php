@@ -11,8 +11,8 @@ use App\Helpers\InvoiceHelper;
 use App\Helpers\ResponseStatus;
 use App\Http\Resources\InvoiceResource;
 use App\Notifications\InvoiceNotification;
-use Illuminate\Notifications\Notification;
 use App\Http\Requests\CreateInvoiceRequest;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Resources\InvoiceDetailsResource;
 
 class InvoiceController extends Controller
@@ -34,7 +34,7 @@ class InvoiceController extends Controller
             $customer = Customer::find($data['customer_id']);
             if(count($customer->users) > 0){
                 $invoice = Invoice::create($data);
-                Notification::create($customer, new InvoiceNotification($invoice));
+                Notification::send($customer, new InvoiceNotification($invoice));
                 return Response::respondSuccess(Response::SUCCESS, new InvoiceResource($invoice));
             }
             return Response::respondError(Response::NOT_HAVE_USERS, ResponseStatus::VALIDATION_ERROR);

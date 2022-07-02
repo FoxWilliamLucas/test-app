@@ -22,9 +22,11 @@ class DataSampleSeeder extends Seeder
         $data = [
             'customers' => [
                 [
+                    'email'         => 'customer1@mail.com',
                     'name' => 'Client One'
                 ],
                 [
+                    'email'         => 'customer2@mail.com',
                     'name' => 'Client Two'
                 ]
             ],
