@@ -23,37 +23,6 @@ class InvoiceController extends Controller
         try{
             $invoice->load('customer','customer.users', 'customer.users.sessions');
             return Response::respondSuccess(Response::SUCCESS, new InvoiceDetailsResource($invoice));
-            // $invoicedEvents = $invoice->customer->users->map->getInvoicedEvents()->flatten();
-            // return Response::respondSuccess(Response::SUCCESS, [
-            //     'id'                        => $invoice->id,
-            //     'start'                     => $invoice->start,
-            //     'end'                       => $invoice->end,    
-            //     'invoiced_events'           => $invoicedEvents,
-            //     'customer_id'               => $invoice->customer_id,
-            //     'registered_frequency'      => $invoice->customer->users->map(function($user)use($invoice){
-            //                         return InvoiceHelper::dateBetween(
-            //                             $user->registered, [$invoice->start, $invoice->end]
-            //                         );
-            //                     })->count(),
-            //     'activated_frequency'       => $invoicedEvents->whereNotNull('activated')->unique('user_id')->count(),
-            //     'appointment_frequency'     => $invoicedEvents->whereNotNull('appointment')->unique('user_id')->count(),
-            //     'total_price'               => $invoice->getTotalPrice(),
-            //     'registered_price'          => Prices::REGISTRATION,
-            //     'activated_price'           => Prices::ACTIVATION,
-            //     'appointment_price'         => Prices::APPOINTMENT,
-            //     'users'                     => $invoice->customer->users->map(function($user, $key)use($invoice){
-            //         $data = InvoiceHelper::getEventsPrice($invoice, $user);
-            //         return [
-            //             'email'             => $user->email,
-            //             'calculated_events' => [
-            //                 $user->only('created'),
-            //                 $data['activatedEvent'],
-            //                 $data['appointmentEvent']
-            //             ],
-            //             'price'             => $data['price'],
-            //         ];
-            //     }),
-            // ]);
         } catch (\Exception $e) {
             return Response::respondError($e->getMessage());
         }
@@ -62,7 +31,7 @@ class InvoiceController extends Controller
     public function store(CreateInvoiceRequest $request){
         try{
             $data = $request->validated();
-            $customer = Customer::with('users', 'users.sessions')->find($data['customer_id']);
+            $customer = Customer::find($data['customer_id']);
             if(count($customer->users) > 0){
                 $invoice = Invoice::create($data);
                 Notification::create($customer, new InvoiceNotification($invoice));

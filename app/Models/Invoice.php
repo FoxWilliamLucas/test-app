@@ -18,11 +18,6 @@ class Invoice extends Model
     ];
 
 
-
-    // public function getInvoicedEvents(){
-    //     return $this->customer->users->map->getInvoicedEvents();
-    // }
-
     public function getTotalPrice(){
         return $this->customer->users->map(function($user){
             return InvoiceHelper::getEventsPrice($this, $user)['price'];
