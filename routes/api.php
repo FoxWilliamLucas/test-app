@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::controller('InvoiceController')
     // ->middleware(['auth:users'])
     ->group(function () {
-        Route::get('/invoices/{id}',    'show');
+        Route::get('/invoices/{invoice}',    'show');
         Route::post('/invoices',        'store');
 });

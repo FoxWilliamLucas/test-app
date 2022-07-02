@@ -23,12 +23,15 @@ class User extends Authenticatable
         'customer_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        
-    ];
+    public function getInvoicedEvents(){
+        $events = collect();
+        $events->push($this->sessions->whereNotNull('activated')->first());
+        $events->push($this->sessions->whereNotNull('appointment')->first());
+        return $events->filter();
+    }
+
+
+    public function sessions(){
+        return $this->hasMany(Session::class);
+    }
 }

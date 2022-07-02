@@ -4,6 +4,15 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Helpers\{Response, ResponseStatus};
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\{
+    NotFoundHttpException,
+    AccessDeniedHttpException,
+    MethodNotAllowedHttpException,
+};
 
 class Handler extends ExceptionHandler
 {
@@ -43,8 +52,25 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+        if(request()->wantsJson()){
+            $this->renderable(function (MethodNotAllowedHttpException $exception, $request) {
+                return Response::respondError(Response::NOT_ALLOWED,ResponseStatus::NOT_ALLOWED);
+            });
+            $this->renderable(function (NotFoundHttpException $exception, $request) {
+                return Response::respondError(Response::NOT_FOUND, ResponseStatus::NOT_FOUND);
+            });
+            $this->renderable(function (ModelNotFoundException $exception, $request) {
+                return Response::respondError(Response::NOT_FOUND, ResponseStatus::NOT_FOUND);
+            });
+            $this->renderable(function (AccessDeniedHttpException $exception, $request) {
+                return Response::respondError(Response::NOT_AUTHORIZED,ResponseStatus::FORBIDDEN);
+            });
+            $this->renderable(function (AuthenticationException $exception, $request) {
+                return Response::respondError(Response::NOT_AUTHENTICATED,ResponseStatus::NETWORK_AUTHENTICATION_REQUIRED);
+            });
+            $this->renderable(function (ValidationException $exception, $request) {
+                return Response::respondError($exception->getMessage(),ResponseStatus::VALIDATION_ERROR);
+            });            
+        }
     }
 }

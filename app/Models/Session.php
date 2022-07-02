@@ -9,10 +9,14 @@ class Session extends Model
 {
     use HasFactory;
 
-    protected $table = [
+    protected $fillable = [
         'activated',
         'appointment',
         'user_id',
     ];
 
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
