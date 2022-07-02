@@ -46,6 +46,8 @@ class InvoiceDetailsResource extends JsonResource
                     'price'             => $data['price'],
                 ];
             }),
+            'updated_at'                => $this->updated_at,
+            'created_at'                => $this->created_at,
         ];
     }
 }
